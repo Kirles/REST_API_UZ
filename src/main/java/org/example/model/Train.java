@@ -15,8 +15,7 @@ public class Train {
 
     @Column(name = "number", nullable = false, unique = true, length = 4)
     @NotBlank(message = "Номер поїзда обов'язковий")
-    @Pattern(regexp = "^[0-9]{3}[А-ЯЁІЇЄа-яёіїє]$",
-            message = "Номер поїзда має складатися з трьох цифр і кириличної літери (наприклад 001Л)")
+    @Pattern(regexp = "^[0-9]{3}[А-ЯЁІЇЄа-яёіїє]$", message = "Номер поїзда має складатися з трьох цифр і кириличної літери (наприклад 001Л)")
     private String number;
 
     @OneToMany(mappedBy = "train", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

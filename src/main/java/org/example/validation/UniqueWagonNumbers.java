@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = UniqueWagonNumbersValidator.class)
-@interface UniqueWagonNumbers {
+public @interface UniqueWagonNumbers {
     String message() default "В одному поїзді не може бути вагонів з однаковим номером";
     Class<?>[] groups() default {};
     Class<?>[] payload() default {};

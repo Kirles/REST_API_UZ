@@ -1,50 +1,48 @@
-package org.example.model;
+package org.example.dto;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.NotBlank;
+import org.example.model.Station;
+import org.example.model.Train;
 import org.example.validation.ValidTripStations;
 import org.example.validation.ValidTripTime;
 
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "trip")
 @ValidTripTime
 @ValidTripStations
-public class Trip {
+public class TripDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "train_id", nullable = false)
-    @NotNull(message = "Поїзд обов'язковий для поїздки")
+    @NotBlank(message = "ID поїзда обов'язковий")
     private Train train;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "from_station_id", nullable = false)
-    @NotNull(message = "Станція відправлення обов'язкова")
+    @NotBlank(message = "Станція відправлення обов'язкова")
     private Station fromStation;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "to_station_id", nullable = false)
-    @NotNull(message = "Станція прибуття обов'язкова")
+    @NotBlank(message = "Станція прибуття обов'язкова")
     private Station toStation;
 
     @Column(name = "departure_time", nullable = false)
-    @NotNull(message = "Час відправлення обов'язковий")
+    @NotBlank(message = "Час відправлення обов'язковий")
     @Future(message = "Час відправлення має бути в майбутньому")
     private LocalDateTime departureTime;
 
     @Column(name = "arrival_time", nullable = false)
-    @NotNull(message = "Час прибуття обов'язковий")
+    @NotBlank(message = "Час прибуття обов'язковий")
     @Future(message = "Час відправлення має бути в майбутньому")
     private LocalDateTime arrivalTime;
 
-    public Trip() {}
+    public TripDTO() {}
 
-    public Trip(Train train, Station fromStation, Station toStation, LocalDateTime departureTime, LocalDateTime arrivalTime) {
+    public TripDTO(Train train, Station fromStation, Station toStation, LocalDateTime departureTime, LocalDateTime arrivalTime) {
         this.train = train;
         this.fromStation = fromStation;
         this.toStation = toStation;
@@ -78,4 +76,5 @@ public class Trip {
                 ", arrivalTime=" + arrivalTime +
                 '}';
     }
+
 }

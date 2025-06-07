@@ -2,9 +2,11 @@ package org.example.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import org.example.validation.UniqueWagonNumbers;
 
 @Entity
 @Table(name = "wagon", uniqueConstraints = @UniqueConstraint(columnNames = {"train_id", "wagon_number"}))
+@UniqueWagonNumbers
 public class Wagon {
 
     @Id
@@ -27,13 +29,11 @@ public class Wagon {
     @NotNull(message = "Клас вагона обов'язковий")
     private WagonClass wagonClass;
 
-
     public Wagon() {}
 
     public Wagon(Train train, String wagonNumber) {
         this.train = train;
         this.wagonNumber = wagonNumber;
-        // Извлекаем класс из номера вагона
         if (wagonNumber != null && wagonNumber.length() == 3) {
             char classChar = Character.toUpperCase(wagonNumber.charAt(2));
             this.wagonClass = WagonClass.valueOf(String.valueOf(classChar));
@@ -49,7 +49,6 @@ public class Wagon {
     public String getWagonNumber() { return wagonNumber; }
     public void setWagonNumber(String wagonNumber) {
         this.wagonNumber = wagonNumber;
-        // Автоматически обновляем класс вагона
         if (wagonNumber != null && wagonNumber.length() == 3) {
             char classChar = Character.toUpperCase(wagonNumber.charAt(2));
             this.wagonClass = WagonClass.valueOf(String.valueOf(classChar));
