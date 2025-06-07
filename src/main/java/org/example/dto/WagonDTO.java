@@ -1,6 +1,7 @@
 package org.example.dto;
 
 import jakarta.validation.constraints.*;
+import org.example.model.Train;
 import org.example.model.WagonClass;
 import org.example.validation.UniqueWagonNumbers;
 
@@ -9,10 +10,7 @@ public class WagonDTO {
 
     private Long id;
 
-    @NotNull(message = "ID поїзда обов'язковий")
-    private Long trainId;
-
-    private String trainNumber;
+    private Train train;
 
     @NotBlank(message = "Номер вагона обов'язковий")
     @Pattern(regexp = "^[0-9]{2}[КПЛкпл]$", message = "Номер вагона має бути у форматі '01К', '02П', '03Л'")
@@ -22,9 +20,8 @@ public class WagonDTO {
 
     public WagonDTO() {}
 
-    public WagonDTO(Long trainId, String trainNumber, String wagonNumber) {
-        this.trainId = trainId;
-        this.trainNumber = trainNumber;
+    public WagonDTO(Train train, String trainNumber, String wagonNumber) {
+        this.train = train;
         this.wagonNumber = wagonNumber;
         this.wagonClass = extractWagonClass(wagonNumber);
     }
@@ -37,20 +34,12 @@ public class WagonDTO {
         this.id = id;
     }
 
-    public Long getTrainId() {
-        return trainId;
+    public Train getTrain() {
+        return train;
     }
 
-    public void setTrainId(Long trainId) {
-        this.trainId = trainId;
-    }
-
-    public String getTrainNumber() {
-        return trainNumber;
-    }
-
-    public void setTrainNumber(String trainNumber) {
-        this.trainNumber = trainNumber;
+    public void setTrain(Train train) {
+        this.train = train;
     }
 
     public String getWagonNumber() {
@@ -83,15 +72,14 @@ public class WagonDTO {
     }
 
     public boolean hasTrainInfo() {
-        return trainNumber != null;
+        return train != null;
     }
 
     @Override
     public String toString() {
         return "WagonDto{" +
                 "id=" + id +
-                ", trainId=" + trainId +
-                ", trainNumber='" + trainNumber + '\'' +
+                ", train=" + train +
                 ", wagonNumber='" + wagonNumber + '\'' +
                 ", wagonClass=" + wagonClass +
                 '}';

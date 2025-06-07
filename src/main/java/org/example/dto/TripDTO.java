@@ -19,7 +19,7 @@ public class TripDTO {
 
     private Long id;
 
-    @NotBlank(message = "ID поїзда обов'язковий")
+    @NotBlank(message = "Поїзд обов'язковий")
     private Train train;
 
     @NotBlank(message = "Станція відправлення обов'язкова")
