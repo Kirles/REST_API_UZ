@@ -17,17 +17,17 @@ public class Trip {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "train_id", nullable = false)
     @NotNull(message = "Поїзд обов'язковий для поїздки")
     private Train train;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "from_station_id", nullable = false)
     @NotNull(message = "Станція відправлення обов'язкова")
     private Station fromStation;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "to_station_id", nullable = false)
     @NotNull(message = "Станція прибуття обов'язкова")
     private Station toStation;

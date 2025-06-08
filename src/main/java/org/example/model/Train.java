@@ -18,11 +18,10 @@ public class Train {
     @Pattern(regexp = "^[0-9]{3}[А-ЯЁІЇЄа-яёіїє]$", message = "Номер поїзда має складатися з трьох цифр і кириличної літери (наприклад 001Л)")
     private String number;
 
-    @OneToMany(mappedBy = "train", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @NotEmpty(message = "Поїзд має складатися щонайменше з одного вагона")
+    @OneToMany(mappedBy = "train", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Wagon> wagons;
 
-    @OneToMany(mappedBy = "train", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "train", fetch = FetchType.EAGER)
     private List<Trip> trips;
 
     public Train() {}

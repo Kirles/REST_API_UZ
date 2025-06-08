@@ -24,10 +24,10 @@ public class Station {
     @Pattern(regexp = "^22\\d{5}$", message = "Код станції має починатися з 22 і складатися з 7 цифр")
     private String code;
 
-    @OneToMany(mappedBy = "fromStation", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "fromStation", fetch = FetchType.EAGER)
     private List<Trip> departureTrips;
 
-    @OneToMany(mappedBy = "toStation", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "toStation", fetch = FetchType.EAGER)
     private List<Trip> arrivalTrips;
 
     public Station() {}

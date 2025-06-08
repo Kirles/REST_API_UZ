@@ -3,23 +3,30 @@ package org.example.mapper;
 import org.example.dto.WagonDTO;
 import org.example.model.Wagon;
 import org.springframework.stereotype.Component;
+import org.example.service.TrainService;
 
 @Component
 public class WagonMapper {
 
-    public static WagonDTO toDto(Wagon wagon) {
+    private final TrainService trainService;
+
+    public WagonMapper(TrainService trainService) {
+        this.trainService = trainService;
+    }
+
+    public WagonDTO toDto(Wagon wagon) {
         WagonDTO dto = new WagonDTO();
-        dto.setTrain(wagon.getTrain());
+        dto.setTrainId(wagon.getTrain().getId());
         dto.setWagonNumber(wagon.getWagonNumber());
-        dto.setWagonClass(wagon.getWagonClass());
         return dto;
     }
 
-    public static Wagon toEntity(WagonDTO dto) {
+    public Wagon toEntity(WagonDTO dto) {
         Wagon wagon = new Wagon();
-        wagon.setTrain(dto.getTrain());
+        wagon.setTrain(trainService.findById(dto.getTrainId()));
         wagon.setWagonNumber(dto.getWagonNumber());
-        wagon.setWagonClass(dto.getWagonClass());
         return wagon;
     }
 }
+
+

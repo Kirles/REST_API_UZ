@@ -2,6 +2,7 @@ package org.example.repository;
 
 import org.example.model.Station;
 
+import org.example.model.Train;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -54,6 +55,11 @@ public class StationRepository {
     public List<Station> findByCode(String code) {
         String sql = "SELECT * FROM station WHERE code = ?";
         return jdbcTemplate.query(sql, new Object[]{code}, new StationRowMapper());
+    }
+
+    public Station findById(Long id) {
+        String sql = "SELECT * FROM station WHERE id = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{id}, new StationRowMapper());
     }
 
     private static class StationRowMapper implements RowMapper<Station> {

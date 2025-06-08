@@ -12,13 +12,15 @@ import java.util.List;
 public class TrainService {
 
     private final TrainRepository trainRepository;
+    private final TrainMapper trainMapper;
 
-    public TrainService(TrainRepository trainRepository) {
+    public TrainService(TrainRepository trainRepository, TrainMapper trainMapper) {
         this.trainRepository = trainRepository;
+        this.trainMapper = trainMapper;
     }
 
     public Train create(TrainDTO dto) {
-        Train station = TrainMapper.toEntity(dto);
+        Train station = trainMapper.toEntity(dto);
         return trainRepository.save(station);
     }
 
@@ -36,6 +38,10 @@ public class TrainService {
 
     public List<Train> findByNumber(String number) {
         return trainRepository.findByNumber(number);
+    }
+
+    public Train findById(Long id) {
+        return trainRepository.findById(id);
     }
 
 }

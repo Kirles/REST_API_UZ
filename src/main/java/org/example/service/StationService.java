@@ -12,13 +12,15 @@ import java.util.List;
 public class StationService {
 
     private final StationRepository stationRepository;
+    private final StationMapper stationMapper;
 
-    public StationService(StationRepository stationRepository) {
+    public StationService(StationRepository stationRepository, StationMapper stationMapper) {
         this.stationRepository = stationRepository;
+        this.stationMapper = stationMapper;
     }
 
     public Station create(StationDTO dto) {
-        Station station = StationMapper.toEntity(dto);
+        Station station = stationMapper.toEntity(dto);
         return stationRepository.save(station);
     }
 

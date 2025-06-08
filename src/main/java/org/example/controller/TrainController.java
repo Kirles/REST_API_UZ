@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/station")
+@RequestMapping("/train")
 public class TrainController {
 
     private final TrainService trainService;
@@ -40,7 +40,7 @@ public class TrainController {
         return HttpStatus.OK;
     }
 
-    @GetMapping("/code/{number}")
+    @GetMapping("/number/{number}")
     public ResponseEntity<List<Train>> findByNumber(@PathVariable String number) {
         return new ResponseEntity<>(trainService.findByNumber(number), HttpStatus.OK);
     }

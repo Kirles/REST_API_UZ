@@ -6,7 +6,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
-import org.example.model.Station;
 import org.example.model.Train;
 import org.example.validation.ValidTripStations;
 import org.example.validation.ValidTripTime;
@@ -22,13 +21,15 @@ public class TripDTO {
     @NotBlank(message = "Поїзд обов'язковий")
     private Train train;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "from_station_id", nullable = false)
     @NotBlank(message = "Станція відправлення обов'язкова")
-    private Station fromStation;
+    private Long fromStationId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "to_station_id", nullable = false)
     @NotBlank(message = "Станція прибуття обов'язкова")
-    private Station toStation;
+    private Long toStationId;
 
     @Column(name = "departure_time", nullable = false)
     @NotBlank(message = "Час відправлення обов'язковий")
@@ -42,10 +43,10 @@ public class TripDTO {
 
     public TripDTO() {}
 
-    public TripDTO(Train train, Station fromStation, Station toStation, LocalDateTime departureTime, LocalDateTime arrivalTime) {
+    public TripDTO(Train train, Long fromStationId, Long toStationId, LocalDateTime departureTime, LocalDateTime arrivalTime) {
         this.train = train;
-        this.fromStation = fromStation;
-        this.toStation = toStation;
+        this.fromStationId = fromStationId;
+        this.toStationId = toStationId;
         this.departureTime = departureTime;
         this.arrivalTime = arrivalTime;
     }
@@ -56,11 +57,11 @@ public class TripDTO {
     public Train getTrain() { return train; }
     public void setTrain(Train train) { this.train = train; }
 
-    public Station getFromStation() { return fromStation; }
-    public void setFromStation(Station fromStation) { this.fromStation = fromStation; }
+    public Long getFromStation() { return fromStationId; }
+    public void setFromStation(Long fromStationid) { this.fromStationId = fromStationid; }
 
-    public Station getToStation() { return toStation; }
-    public void setToStation(Station toStation) { this.toStation = toStation; }
+    public Long getToStation() { return toStationId; }
+    public void setToStation(Long toStationid) { this.toStationId = toStationid; }
 
     public LocalDateTime getDepartureTime() { return departureTime; }
     public void setDepartureTime(LocalDateTime departureTime) { this.departureTime = departureTime; }

@@ -13,9 +13,9 @@ public class TrainDTO {
     @Pattern(regexp = "^[0-9]{3}[А-ЯЁІЇЄа-яёіїє]$", message = "Номер поїзда має складатися з трьох цифр і кириличної літери (наприклад 001Л)")
     private String number;
 
-    private List<WagonDTO> wagonDTOS;
+    private List<Long> wagonsId;
 
-    private List<TripDTO> tripDTOS;
+    private List<Long> tripsId;
 
     public TrainDTO() {}
 
@@ -39,20 +39,20 @@ public class TrainDTO {
         this.number = number;
     }
 
-    public void setWagonDTOS(List<WagonDTO> wagonDTOS) {
-        this.wagonDTOS = wagonDTOS;
+    public void setWagonsId(List<Long> wagonsId) {
+        this.wagonsId = wagonsId;
     }
 
-    public List<WagonDTO> getWagonDTOS() {
-        return wagonDTOS;
+    public List<Long> getWagonsId() {
+        return wagonsId;
     }
 
-    public void setTripDTOS(List<TripDTO> tripDTOS) {
-        this.tripDTOS = tripDTOS;
+    public void setTripDTOS(List<Long> tripsId) {
+        this.tripsId = tripsId;
     }
 
-    public List<TripDTO> getTripDTOS() {
-        return tripDTOS;
+    public List<Long> getTripDTOS() {
+        return tripsId;
     }
 
     @Override

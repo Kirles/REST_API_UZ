@@ -5,7 +5,7 @@ import jakarta.validation.constraints.*;
 import org.example.validation.UniqueWagonNumbers;
 
 @Entity
-@Table(name = "wagon", uniqueConstraints = @UniqueConstraint(columnNames = {"train_id", "wagon_number"}))
+@Table(name = "wagon")
 @UniqueWagonNumbers
 public class Wagon {
 
@@ -13,31 +13,21 @@ public class Wagon {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "train_id", nullable = false)
     @NotNull(message = "Поїзд обов'язковий для вагона")
     private Train train;
 
     @Column(name = "wagon_number", nullable = false, length = 3)
     @NotBlank(message = "Номер вагона обов'язковий")
-    @Pattern(regexp = "^[0-9]{2}[КПЛкпл]$",
-            message = "Номер вагона має бути у форматі '01К', '02П', '03Л'")
+    @Pattern(regexp = "^[0-9]{2}[КПЛкпл]$", message = "Номер вагона має бути у форматі '01К', '02П', '03Л'")
     private String wagonNumber;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "wagon_class", nullable = false, length = 1)
-    @NotNull(message = "Клас вагона обов'язковий")
-    private WagonClass wagonClass;
 
     public Wagon() {}
 
     public Wagon(Train train, String wagonNumber) {
         this.train = train;
         this.wagonNumber = wagonNumber;
-        if (wagonNumber != null && wagonNumber.length() == 3) {
-            char classChar = Character.toUpperCase(wagonNumber.charAt(2));
-            this.wagonClass = WagonClass.valueOf(String.valueOf(classChar));
-        }
     }
 
     public Long getId() { return id; }
@@ -49,21 +39,13 @@ public class Wagon {
     public String getWagonNumber() { return wagonNumber; }
     public void setWagonNumber(String wagonNumber) {
         this.wagonNumber = wagonNumber;
-        if (wagonNumber != null && wagonNumber.length() == 3) {
-            char classChar = Character.toUpperCase(wagonNumber.charAt(2));
-            this.wagonClass = WagonClass.valueOf(String.valueOf(classChar));
-        }
     }
-
-    public WagonClass getWagonClass() { return wagonClass; }
-    public void setWagonClass(WagonClass wagonClass) { this.wagonClass = wagonClass; }
 
     @Override
     public String toString() {
         return "Wagon{" +
                 "id=" + id +
-                ", wagonNumber='" + wagonNumber + '\'' +
-                ", wagonClass=" + wagonClass +
+                ", wagonNumber='" + wagonNumber +
                 '}';
     }
 }

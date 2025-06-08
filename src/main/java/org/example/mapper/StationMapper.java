@@ -7,14 +7,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class StationMapper {
 
-    public static StationDTO toDto(Station station) {
+    public StationMapper() {
+    }
+
+    public StationDTO toDto(Station station) {
         StationDTO dto = new StationDTO();
         dto.setName(station.getName());
         dto.setCode(station.getCode());
         return dto;
     }
 
-    public static Station toEntity(StationDTO dto) {
+    public Station toEntity(StationDTO dto) {
         Station station = new Station();
         station.setName(dto.getName());
         station.setCode(dto.getCode());

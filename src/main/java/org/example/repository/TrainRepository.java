@@ -54,7 +54,12 @@ public class TrainRepository {
         return jdbcTemplate.query(sql, new Object[]{number}, new TrainRowMapper());
     }
 
-    private static class TrainRowMapper implements RowMapper<Train> {
+    public Train findById(Long id) {
+        String sql = "SELECT * FROM train WHERE id = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{id}, new TrainRowMapper());
+    }
+
+    private class TrainRowMapper implements RowMapper<Train> {
         @Override
         public Train mapRow(ResultSet rs, int rowNum) throws SQLException {
             Train train = new Train();
