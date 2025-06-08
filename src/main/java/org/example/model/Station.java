@@ -21,9 +21,8 @@ public class Station {
 
     @Column(name = "code", nullable = false, unique = true)
     @NotNull(message = "Код станції обов'язковий")
-    @Min(value = 2200000, message = "Код станції має починатися з 22 і складатися з 7 цифр")
-    @Max(value = 2299999, message = "Код станції має починатися з 22 і складатися з 7 цифр")
-    private Long code;
+    @Pattern(regexp = "^22\\d{5}$", message = "Код станції має починатися з 22 і складатися з 7 цифр")
+    private String code;
 
     @OneToMany(mappedBy = "fromStation", fetch = FetchType.LAZY)
     private List<Trip> departureTrips;
@@ -33,7 +32,7 @@ public class Station {
 
     public Station() {}
 
-    public Station(String name, Long code) {
+    public Station(String name, String code) {
         this.name = name;
         this.code = code;
     }
@@ -44,8 +43,8 @@ public class Station {
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 
-    public Long getCode() { return code; }
-    public void setCode(Long code) { this.code = code; }
+    public String getCode() { return code; }
+    public void setCode(String code) { this.code = code; }
 
     public List<Trip> getDepartureTrips() { return departureTrips; }
     public void setDepartureTrips(List<Trip> departureTrips) { this.departureTrips = departureTrips; }

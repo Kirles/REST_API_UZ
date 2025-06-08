@@ -11,13 +11,12 @@ public class StationDTO {
     private String name;
 
     @NotBlank(message = "Код станції обов'язковий")
-    @Min(value = 2200000, message = "Код станції має починатися з 22 і складатися з 7 цифр")
-    @Max(value = 2299999, message = "Код станції має починатися з 22 і складатися з 7 цифр")
-    private Long code;
+    @Pattern(regexp = "^22\\d{5}$", message = "Код станції має починатися з 22 і складатися з 7 цифр")
+    private String code;
 
     public StationDTO() {}
 
-    public StationDTO(String name, Long code) {
+    public StationDTO(String name, String code) {
         this.name = name;
         this.code = code;
     }
@@ -39,11 +38,11 @@ public class StationDTO {
         this.name = name;
     }
 
-    public Long getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(Long code) {
+    public void setCode(String code) {
         this.code = code;
     }
 
