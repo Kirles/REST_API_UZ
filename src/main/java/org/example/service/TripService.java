@@ -10,6 +10,7 @@ import org.example.repository.TrainRepository;
 import org.example.repository.TripRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -47,9 +48,12 @@ public class TripService {
         tripRepository.deleteById(id);
     }
 
-
     public Trip findById(Long id) {
         return tripRepository.findById(id);
+    }
+
+    public List<Trip> findTripsBetweenStationsOnDate(String departureStation, String arrivalStation, LocalDateTime departureDateTime) {
+        return tripRepository.findTripsBetweenStationsOnDate(departureStation, arrivalStation, departureDateTime);
     }
 
 }

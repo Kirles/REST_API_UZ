@@ -40,8 +40,8 @@ public class StationController {
         return HttpStatus.OK;
     }
 
-    @GetMapping("/code/{code}")
-    public ResponseEntity<List<Station>> findByCode(@PathVariable String code) {
-        return new ResponseEntity<>(stationService.findByCode(code), HttpStatus.OK);
+    @GetMapping("/by-code/{code}")
+    public ResponseEntity<List<String>> getStationNamesByCode(@PathVariable String code) {
+        return new ResponseEntity<>(stationService.getStationNameByCode(code), HttpStatus.OK);
     }
 }

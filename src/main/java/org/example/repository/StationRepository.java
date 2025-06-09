@@ -48,9 +48,9 @@ public class StationRepository {
         return jdbcTemplate.query(sql, new StationRowMapper());
     }
 
-    public List<Station> findByCode(String code) {
-        String sql = "SELECT * FROM station WHERE code = ?";
-        return jdbcTemplate.query(sql, new Object[]{code}, new StationRowMapper());
+    public List<String> findByCode(String code) {
+        String sql = "SELECT name FROM station WHERE code = ?";
+        return jdbcTemplate.query(sql, new Object[]{code}, (rs, rowNum) -> rs.getString("name"));
     }
 
     public Station findById(Long id) {

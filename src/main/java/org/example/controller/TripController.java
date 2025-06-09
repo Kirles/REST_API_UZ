@@ -4,10 +4,12 @@ import jakarta.validation.Valid;
 import org.example.dto.TripDTO;
 import org.example.model.Trip;
 import org.example.service.TripService;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -39,6 +41,15 @@ public class TripController {
     public HttpStatus delete(@PathVariable Long id) {
         tripService.delete(id);
         return HttpStatus.OK;
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Trip>> findTrips(
+            @RequestParam String fromStation,
+            @RequestParam String toStation,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime departureTime){
+
+        return new ResponseEntity<>(tripService.findTripsBetweenStationsOnDate(fromStation, toStation, departureTime), HttpStatus.OK);
     }
 
 }

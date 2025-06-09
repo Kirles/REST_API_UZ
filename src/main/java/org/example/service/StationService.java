@@ -36,7 +36,7 @@ public class StationService {
         stationRepository.deleteById(id);
     }
 
-    public List<Station> findByCode(String code) {
+    public List<String> getStationNameByCode(String code) {
         return stationRepository.findByCode(code);
     }
 

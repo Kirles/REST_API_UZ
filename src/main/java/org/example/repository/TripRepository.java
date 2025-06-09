@@ -7,6 +7,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -56,5 +57,19 @@ public class TripRepository {
         String sql = "SELECT * FROM trip WHERE id = ?";
         return jdbcTemplate.queryForObject(sql, new Object[]{id}, tripRowMapper);
     }
+
+    public List<Trip> findTripsBetweenStationsOnDate(String fromStationName, String toStationName, LocalDateTime departureDateTime) {
+        String getIdSql = "SELECT id FROM station WHERE name = ?";
+
+        Long fromStationId = jdbcTemplate.queryForObject(getIdSql, Long.class, fromStationName);
+        Long toStationId = jdbcTemplate.queryForObject(getIdSql, Long.class, toStationName);
+
+        String sql = "SELECT * FROM trip WHERE from_station_id = ? AND to_station_id = ? AND departure_time = ?";
+
+        return jdbcTemplate.query(sql, new Object[]{fromStationId, toStationId, departureDateTime}, tripRowMapper);
+    }
+
+
+
 
 }
