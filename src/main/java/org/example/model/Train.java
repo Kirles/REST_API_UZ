@@ -3,8 +3,6 @@ package org.example.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
-import java.util.List;
-
 @Entity
 @Table(name = "train")
 public class Train {
@@ -18,12 +16,6 @@ public class Train {
     @Pattern(regexp = "^[0-9]{3}[А-ЯЁІЇЄа-яёіїє]$", message = "Номер поїзда має складатися з трьох цифр і кириличної літери (наприклад 001Л)")
     private String number;
 
-    @OneToMany(mappedBy = "train", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Wagon> wagons;
-
-    @OneToMany(mappedBy = "train", fetch = FetchType.EAGER)
-    private List<Trip> trips;
-
     public Train() {}
 
     public Train(String number) {
@@ -35,12 +27,6 @@ public class Train {
 
     public String getNumber() { return number; }
     public void setNumber(String number) { this.number = number; }
-
-    public List<Wagon> getWagons() { return wagons; }
-    public void setWagons(List<Wagon> wagons) { this.wagons = wagons; }
-
-    public List<Trip> getTrips() { return trips; }
-    public void setTrips(List<Trip> trips) { this.trips = trips; }
 
     @Override
     public String toString() {

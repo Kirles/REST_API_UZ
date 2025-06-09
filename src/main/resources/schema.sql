@@ -13,7 +13,6 @@ CREATE TABLE IF NOT EXISTS wagon (
     id SERIAL PRIMARY KEY,
     train_id INT NOT NULL REFERENCES train(id) ON DELETE CASCADE,
     wagon_number VARCHAR(3) NOT NULL,
-    wagon_class CHAR(1) NOT NULL,
     UNIQUE (train_id, wagon_number)
 );
 

@@ -7,9 +7,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class StationMapper {
 
-    public StationMapper() {
-    }
-
     public StationDTO toDto(Station station) {
         StationDTO dto = new StationDTO();
         dto.setName(station.getName());

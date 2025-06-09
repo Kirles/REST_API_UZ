@@ -1,9 +1,7 @@
 package org.example.dto;
 
 import jakarta.validation.constraints.*;
-import org.example.validation.UniqueWagonNumbers;
 
-@UniqueWagonNumbers
 public class WagonDTO {
 
     private Long id;
@@ -47,7 +45,7 @@ public class WagonDTO {
 
     @Override
     public String toString() {
-        return "WagonDto{" +
+        return "WagonDTO{" +
                 "id=" + id +
                 ", trainId=" + trainId +
                 ", wagonNumber='" + wagonNumber +

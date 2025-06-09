@@ -2,18 +2,16 @@ package org.example.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import org.example.validation.UniqueWagonNumbers;
 
 @Entity
-@Table(name = "wagon")
-@UniqueWagonNumbers
+@Table(name = "wagon", uniqueConstraints = @UniqueConstraint(columnNames = {"train_id", "wagon_number"}))
 public class Wagon {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "train_id", nullable = false)
     @NotNull(message = "Поїзд обов'язковий для вагона")
     private Train train;

@@ -1,18 +1,12 @@
 package org.example.mapper;
 
 import org.example.dto.WagonDTO;
+import org.example.model.Train;
 import org.example.model.Wagon;
 import org.springframework.stereotype.Component;
-import org.example.service.TrainService;
 
 @Component
 public class WagonMapper {
-
-    private final TrainService trainService;
-
-    public WagonMapper(TrainService trainService) {
-        this.trainService = trainService;
-    }
 
     public WagonDTO toDto(Wagon wagon) {
         WagonDTO dto = new WagonDTO();
@@ -21,12 +15,10 @@ public class WagonMapper {
         return dto;
     }
 
-    public Wagon toEntity(WagonDTO dto) {
+    public Wagon toEntity(WagonDTO dto, Train train) {
         Wagon wagon = new Wagon();
-        wagon.setTrain(trainService.findById(dto.getTrainId()));
+        wagon.setTrain(train);
         wagon.setWagonNumber(dto.getWagonNumber());
         return wagon;
     }
 }
-
-

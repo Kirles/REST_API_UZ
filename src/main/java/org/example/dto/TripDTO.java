@@ -71,7 +71,7 @@ public class TripDTO {
 
     @Override
     public String toString() {
-        return "Trip{" +
+        return "TripDTO{" +
                 "id=" + id +
                 ", departureTime=" + departureTime +
                 ", arrivalTime=" + arrivalTime +

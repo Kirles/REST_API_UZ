@@ -2,16 +2,12 @@ package org.example.repository;
 
 import org.example.model.Station;
 
-import org.example.model.Train;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 @Repository
@@ -62,14 +58,4 @@ public class StationRepository {
         return jdbcTemplate.queryForObject(sql, new Object[]{id}, new StationRowMapper());
     }
 
-    private static class StationRowMapper implements RowMapper<Station> {
-        @Override
-        public Station mapRow(ResultSet rs, int rowNum) throws SQLException {
-            Station station = new Station();
-            station.setId(rs.getLong("id"));
-            station.setCode(rs.getString("code"));
-            station.setName(rs.getString("name"));
-            return station;
-        }
-    }
 }

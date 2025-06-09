@@ -48,7 +48,7 @@ public class StationDTO {
 
     @Override
     public String toString() {
-        return "WagonDto{" +
+        return "StationDTO{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", code='" + code + '\'' +

@@ -2,14 +2,11 @@ package org.example.repository;
 
 import org.example.model.Train;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 @Repository
@@ -59,14 +56,5 @@ public class TrainRepository {
         return jdbcTemplate.queryForObject(sql, new Object[]{id}, new TrainRowMapper());
     }
 
-    private class TrainRowMapper implements RowMapper<Train> {
-        @Override
-        public Train mapRow(ResultSet rs, int rowNum) throws SQLException {
-            Train train = new Train();
-            train.setId(rs.getLong("id"));
-            train.setNumber(rs.getString("number"));
-            return train;
-        }
-    }
 }
 

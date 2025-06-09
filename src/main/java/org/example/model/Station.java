@@ -24,12 +24,6 @@ public class Station {
     @Pattern(regexp = "^22\\d{5}$", message = "Код станції має починатися з 22 і складатися з 7 цифр")
     private String code;
 
-    @OneToMany(mappedBy = "fromStation", fetch = FetchType.EAGER)
-    private List<Trip> departureTrips;
-
-    @OneToMany(mappedBy = "toStation", fetch = FetchType.EAGER)
-    private List<Trip> arrivalTrips;
-
     public Station() {}
 
     public Station(String name, String code) {
@@ -45,12 +39,6 @@ public class Station {
 
     public String getCode() { return code; }
     public void setCode(String code) { this.code = code; }
-
-    public List<Trip> getDepartureTrips() { return departureTrips; }
-    public void setDepartureTrips(List<Trip> departureTrips) { this.departureTrips = departureTrips; }
-
-    public List<Trip> getArrivalTrips() { return arrivalTrips; }
-    public void setArrivalTrips(List<Trip> arrivalTrips) { this.arrivalTrips = arrivalTrips; }
 
     @Override
     public String toString() {
