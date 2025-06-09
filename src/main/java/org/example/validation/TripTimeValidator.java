@@ -2,24 +2,24 @@ package org.example.validation;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-import org.example.model.Trip;
+import org.example.dto.TripDTO;
 
 import java.time.LocalDateTime;
 
-public class TripTimeValidator implements ConstraintValidator<ValidTripTime, Trip> {
+public class TripTimeValidator implements ConstraintValidator<ValidTripTime, TripDTO> {
 
     @Override
     public void initialize(ValidTripTime constraintAnnotation) {
     }
 
     @Override
-    public boolean isValid(Trip trip, ConstraintValidatorContext context) {
-        if (trip == null) {
+    public boolean isValid(TripDTO dto, ConstraintValidatorContext context) {
+        if (dto == null) {
             return true;
         }
 
-        LocalDateTime departureTime = trip.getDepartureTime();
-        LocalDateTime arrivalTime = trip.getArrivalTime();
+        LocalDateTime departureTime = dto.getDepartureTime();
+        LocalDateTime arrivalTime = dto.getArrivalTime();
 
         if (departureTime == null || arrivalTime == null) {
             return true;

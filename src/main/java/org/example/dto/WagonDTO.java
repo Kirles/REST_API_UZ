@@ -6,6 +6,7 @@ public class WagonDTO {
 
     private Long id;
 
+    @NotNull(message = "Поїзд обов'язковий")
     private Long trainId;
 
     @NotBlank(message = "Номер вагона обов'язковий")

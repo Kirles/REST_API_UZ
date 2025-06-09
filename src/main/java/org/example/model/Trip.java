@@ -9,8 +9,6 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "trip")
-@ValidTripTime
-@ValidTripStations
 public class Trip {
 
     @Id

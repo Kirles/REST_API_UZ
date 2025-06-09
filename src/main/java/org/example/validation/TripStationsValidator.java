@@ -2,24 +2,26 @@ package org.example.validation;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-import org.example.model.Trip;
+import org.example.dto.TripDTO;
 
-public class TripStationsValidator implements ConstraintValidator<ValidTripStations, Trip> {
+import java.util.Objects;
+
+public class TripStationsValidator implements ConstraintValidator<ValidTripStations, TripDTO> {
 
     @Override
     public void initialize(ValidTripStations constraintAnnotation) {
     }
 
     @Override
-    public boolean isValid(Trip trip, ConstraintValidatorContext context) {
-        if (trip == null) {
+    public boolean isValid(TripDTO dto, ConstraintValidatorContext context) {
+        if (dto == null) {
             return true;
         }
 
-        if (trip.getFromStation() == null || trip.getToStation() == null) {
+        if (dto.getFromStationId() == null || dto.getToStationId() == null) {
             return true;
         }
 
-        return !trip.getFromStation().getId().equals(trip.getToStation().getId());
+        return !(Objects.equals(dto.getFromStationId(), dto.getToStationId()));
     }
 }

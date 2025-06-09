@@ -26,11 +26,11 @@ public class TripRepository {
 
         jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, new String[] { "id" });
-            ps.setString(1, trip.getTrain().getId().toString());
-            ps.setString(2, trip.getFromStation().getId().toString());
-            ps.setString(3, trip.getToStation().getId().toString());
-            ps.setString(4, trip.getDepartureTime().toString());
-            ps.setString(5, trip.getArrivalTime().toString());
+            ps.setLong(1, trip.getTrain().getId());
+            ps.setLong(2, trip.getFromStation().getId());
+            ps.setLong(3, trip.getToStation().getId());
+            ps.setObject(4, trip.getDepartureTime());
+            ps.setObject(5, trip.getArrivalTime());
             return ps;
         }, keyHolder);
 
@@ -52,14 +52,9 @@ public class TripRepository {
         return jdbcTemplate.query(sql, tripRowMapper);
     }
 
-    public List<Trip> findByNumber(String number) {
-        String sql = "SELECT * FROM trip WHERE number = ?";
-        return jdbcTemplate.query(sql, new Object[]{number}, tripRowMapper);
-    }
-
-    public List<Trip> findByTrainId(Long id) {
-        String sql = "SELECT * FROM trip WHERE train_id = ?";
-        return jdbcTemplate.query(sql, new Object[]{id}, tripRowMapper);
+    public Trip findById(Long id) {
+        String sql = "SELECT * FROM trip WHERE id = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{id}, tripRowMapper);
     }
 
 }
